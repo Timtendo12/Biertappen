@@ -55,9 +55,7 @@
 
 
     <div id="main" class="h-full w-screen">
-
       <div id="bg" class="absolute w-screen h-screen bg-cover -z-10" style="background-image: url('assets/img/bg.jpg')"></div>
-
       <div id="menuLayer" class="flex flex-col align-middle h-screen justify-between">
         <div></div>
 
