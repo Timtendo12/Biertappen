@@ -3,15 +3,17 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\File;
 
-class UpdateQuestionRequest extends FormRequest
+class StorePackRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth()->check();
     }
 
     /**
@@ -22,7 +24,14 @@ class UpdateQuestionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required',
+            'description' => 'required',
+            'image' => [
+                'required',
+                File::image()
+                    ->max(512)
+                    ->dimensions(Rule::dimensions()->width(288)->height(128)),
+            ],
         ];
     }
 }

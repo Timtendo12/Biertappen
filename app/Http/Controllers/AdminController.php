@@ -28,4 +28,8 @@ class AdminController extends Controller
             return back()->withErrors(['email' => 'Your provided credentials could not be verified.']);
         }
     }
+
+    public function kofi() {
+        return view('admin.kofi');
+    }
 }

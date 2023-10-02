@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('packs', function (Blueprint $table) {
             $table->id();
+            $table->uuid();
             $table->string('name');
             $table->text('description')->default('');
             $table->string('image')->unique();

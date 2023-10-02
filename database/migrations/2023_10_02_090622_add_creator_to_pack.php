@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tikkies', function (Blueprint $table) {
-            $table->id();
-            $table->string('url')->unique();
-            $table->dateTime('expiration_date');
-            $table->boolean('is_expired')->default(false);
-            $table->timestamps();
+        Schema::table('packs', function (Blueprint $table) {
+            $table->string('creator')->default('anoniem');
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tikkies');
+        Schema::table('packs', function (Blueprint $table) {
+            //
+        });
     }
 };

@@ -21,10 +21,9 @@
                         <div class="hidden md:block">
                             <div class="ml-10 flex items-baseline space-x-4">
                                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                                <a href="/admin/" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Dashboard</a>
+                                <a href="/admin/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Dashboard</a>
                                 <a href="/admin/packs/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Packs</a>
-                                <a href="/admin/questions/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Vragen</a>
-                                <a href="/admin/tikkies/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Tikkies</a>
+                                <a href="/admin/kofi/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Ko-Fi</a>
                                 <a href="/admin/reports/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Reports</a>
                             </div>
                         </div>
@@ -75,10 +74,9 @@
             <div class="md:hidden" id="mobile-menu">
                 <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                     <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                    <a href="/admin/" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Dashboard</a>
+                    <a href="/admin/" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Dashboard</a>
                     <a href="/admin/packs/" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Packs</a>
-                    <a href="/admin/questions/" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Vragen</a>
-                    <a href="/admin/tikkies/" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Tikkies</a>
+                    <a href="/admin/kofi/" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Ko-Fi</a>
                     <a href="/admin/reports/" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Reports</a>
                 </div>
                 <div class="border-t border-gray-700 pb-3 pt-4">
@@ -106,5 +104,29 @@
             </div>
         </main>
     </div>
+<x-flash />
 </body>
+<script>
+    //--RUN ON LAYOUT LOAD
+
+
+    //removes flash message after 4 seconds
+    if (document.getElementById('flash')) {
+        setTimeout(function () {
+            document.getElementById('flash').remove();
+        }, 4000);
+    }
+
+    //----FUNCTIONS----
+    function toggleUserMenu(show) {
+        const userMenu = document.getElementById('userMenu');
+        const profilePicture = document.getElementById('profilePicture');
+
+        if (show) {
+            userMenu.style.display = 'block';
+        } else {
+            userMenu.style.display = 'none';
+        }
+    }
+</script>
 </html>
