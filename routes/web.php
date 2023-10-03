@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PackController;
-use App\Models\Pack;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,15 +19,15 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [MenuController::class, 'index'])->name('menu');
+Route::post('/game', [GameController::class, 'start']);
 
-// make a route group for admin
-Route::prefix('admin')->group(function () {
-
+ // make a route group for admin
+Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/', [AdminController::class, 'index']);
-    Route::get('/login', [AdminController::class, 'login']);
-    Route::post('/login', [AdminController::class, 'authenticate']);
+    Route::get('/login', [AdminController::class, 'login'])->withoutMiddleware('auth');
+    Route::post('/login', [AdminController::class, 'authenticate'])->withoutMiddleware('auth');
     Route::get('/kofi', [AdminController::class, 'kofi']);
 
-     Route::resource('packs',PackController::class);
+    Route::resource('packs',PackController::class);
+});
 
-})->middleware('auth');

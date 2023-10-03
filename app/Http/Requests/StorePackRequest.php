@@ -32,6 +32,7 @@ class StorePackRequest extends FormRequest
                     ->max(512)
                     ->dimensions(Rule::dimensions()->width(288)->height(128)),
             ],
+            'is_active' => 'string'
         ];
     }
 }

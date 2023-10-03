@@ -1,3 +1,4 @@
+const plugin = require('tailwindcss/plugin')
 module.exports = {
   content: [
     "./resources/**/*.blade.php",
@@ -7,6 +8,14 @@ module.exports = {
   ],
   theme: {
     extend: {
+      textShadow: {
+        sm: '0 1px 2px var(--tw-shadow-color)',
+        DEFAULT: '0 2px 4px var(--tw-shadow-color)',
+        md: '0 4px 8px var(--tw-shadow-color)',
+        lg: '0 8px 16px var(--tw-shadow-color)',
+        xl: '0 16px 24px var(--tw-shadow-color)',
+        '2xl': '0 24px 32px var(--tw-shadow-color)',
+      },
       fontFamily: {
         dklongreach: "'dklongreach', sans-serif",
       },
@@ -16,6 +25,16 @@ module.exports = {
     },
   },
   plugins: [
-    require('flowbite/plugin')
+    require('flowbite/plugin'),
+    plugin(function ({ matchUtilities, theme }) {
+      matchUtilities(
+        {
+          'text-shadow': (value) => ({
+            textShadow: value,
+          }),
+        },
+        { values: theme('textShadow') }
+      )
+    }),
   ],
 }
