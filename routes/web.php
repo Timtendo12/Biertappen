@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PackController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,5 +30,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/kofi', [AdminController::class, 'kofi']);
 
     Route::resource('packs',PackController::class);
+    Route::resource('tasks', TaskController::class);
 });
 

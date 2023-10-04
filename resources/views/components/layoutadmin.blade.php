@@ -9,7 +9,7 @@
     <title>Biertappen</title>
     @vite(['resources/css/app.css','resources/js/app.js'])
 </head>
-<body class="h-full">
+<body>
     <div class="min-h-full">
         <nav class="bg-gray-800">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

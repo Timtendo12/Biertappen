@@ -1,4 +1,5 @@
 <x-layoutadmin header="{{$pack->name}}">
+    <x-tasks.taskmodal :tasks="$tasks" />
     <form method="post" enctype="multipart/form-data">
         @method('PUT')
         @csrf
@@ -85,5 +86,5 @@
             <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Opslaan</button>
         </div>
     </form>
-    <x-packs.pack-table />
+    <x-packs.pack-table :tasks="$tasks" />
 </x-layoutadmin>

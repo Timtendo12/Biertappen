@@ -67,7 +67,8 @@ class PackController extends Controller
     public function show(Pack $pack)
     {
         return view('admin.packs.show', [
-            'pack' => $pack
+            'pack' => $pack,
+            'tasks' => $pack->tasks()->paginate(10)
         ]);
     }
 

@@ -3,6 +3,7 @@ import './bootstrap';
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import { createPinia } from 'pinia'
+import { Modal } from "flowbite";
 
 const pinia = createPinia()
 createInertiaApp({
@@ -17,3 +18,5 @@ createInertiaApp({
       .mount(el)
   },
 })
+
+window.biertapModal = Modal;
