@@ -1,5 +1,5 @@
 <x-layoutadmin header="{{$pack->name}}">
-    <x-tasks.taskmodal :tasks="$tasks" />
+    <x-tasks.taskmodal :tasks="$tasks" :pack_id="$pack->id" />
     <form method="post" enctype="multipart/form-data">
         @method('PUT')
         @csrf

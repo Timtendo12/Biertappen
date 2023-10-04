@@ -1,4 +1,4 @@
-@props(['tasks'])
+@props(['tasks', 'pack_id'])
 <!-- Main modal -->
 <div id="biertap-task-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative w-full max-w-md max-h-full">
@@ -14,6 +14,7 @@
                 <h3 id="header" class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Task aanmaken</h3>
                 <form id="form" class="space-y-6" method="post" action="/admin/tasks">
                     @csrf
+                    <input id="packid" name="pack_id" type="hidden" value="{{$pack_id}}">
                     <div>
                         <label for="task" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opdracht</label>
                         <input type="text" name="task" id="task" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
@@ -52,6 +53,7 @@
         let durationInput = document.getElementById('duration');
         let header = document.getElementById('header');
         let form = document.getElementById('form');
+        let packid = document.getElementById('packid');
 
 
         let tasks = @json($tasks->items());
@@ -72,6 +74,9 @@
         methodElement.value = 'PUT';
 
         form.appendChild(methodElement);
+
+        // remove packid input
+        packid.remove();
 
         // fill in the inputs
         header.innerText = "Task bewerken";

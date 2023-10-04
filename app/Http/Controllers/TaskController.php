@@ -23,7 +23,14 @@ class TaskController extends Controller
     public function store(StoreTaskReqeuest $request)
     {
         $request = $request->validated();
-        
+        $request['players'] = intval($request['players']);
+        $request['duration'] = intval($request['duration']);
+        $request['pack_id'] = intval($request['pack_id']);
+        if(Task::create($request)) {
+            return back()->with('success', 'Task created successfully!');
+        } else {
+            return back()->with('error', 'Task failed to create!');
+        }
     }
 
     /**
@@ -42,6 +49,7 @@ class TaskController extends Controller
         $request = $request->validated();
         $task = Task::findOrFail($id);
         $request['players'] = intval($request['players']);
+        $request['duration'] = intval($request['duration']);
         if($task->update($request)) {
             return back()->with('success', 'Task pa successfully!');
         } else {

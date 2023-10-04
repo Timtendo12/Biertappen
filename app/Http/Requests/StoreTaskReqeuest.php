@@ -26,6 +26,7 @@ class StoreTaskReqeuest extends FormRequest
             'players' => 'required|integer|min:0|max:15',
             'type' => 'required|string|',
             'duration' => 'required|integer|min:0',
+            'pack_id' => 'required|integer|min:0',
         ];
     }
 }
