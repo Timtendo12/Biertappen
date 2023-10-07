@@ -17,7 +17,7 @@
                     <input id="packid" name="pack_id" type="hidden" value="{{$pack_id}}">
                     <div>
                         <label for="task" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opdracht</label>
-                        <input type="text" name="task" id="task" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                        <textarea type="text" name="task" id="task" rows="2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white resize-none" required></textarea>
                     </div>
                     <div class="flex flex-row items-center justify-between w-full gap-4">
                         <div class="flex flex-col justify-center">
@@ -33,7 +33,23 @@
                             <select name="type" id="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
                                 <option value="normal">Normaal</option>
                                 <option value="virus">Virus</option>
+                                <option value="thirty_seconds">Thirty Seconds</option>
+                                <option value="wyr">Would You Rather</option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="flex flex-row items-center justify-between w-full gap-4">
+                        <div class="flex flex-col justify-center">
+                            <label for="min_sips" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Minimum slokjes</label>
+                            <input type="number" value="0" min="0" name="min_sips" id="min_sips" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <label for="max_sips" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Maximum slokjes</label>
+                            <input type="number" min="0" name="max_sips" id="max_sips" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <label for="chug" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Atje?</label>
+                            <input type="checkbox" name="chug" id="max_sips" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
                         </div>
                     </div>
                     <div class="flex flex-row justify-center w-full gap-4">

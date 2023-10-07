@@ -15,6 +15,7 @@ class CheckBannedIp
      */
     public function handle(Request $request, Closure $next): Response
     {
+        $ip = $request->ip();
         return $next($request);
     }
 }

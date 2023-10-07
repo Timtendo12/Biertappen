@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PackController;
@@ -28,6 +29,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/login', [AdminController::class, 'login'])->withoutMiddleware('auth');
     Route::post('/login', [AdminController::class, 'authenticate'])->withoutMiddleware('auth');
     Route::get('/kofi', [AdminController::class, 'kofi']);
+    Route::get('/docs', [DocumentController::class, 'index']);
+    Route::get('/docs/{page}', [DocumentController::class, 'show']);
 
     Route::resource('packs',PackController::class);
     Route::resource('tasks', TaskController::class);
