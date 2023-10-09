@@ -26,6 +26,9 @@ class UpdateTaskReqeuest extends FormRequest
             'players' => 'required|integer|min:0|max:15',
             'type' => 'required|string|',
             'duration' => 'required|integer|min:0',
+            'min_sips' => 'required|integer|min:0',
+            'max_sips' => 'required|integer|min:0',
+            'chug' => 'required',
         ];
     }
 }

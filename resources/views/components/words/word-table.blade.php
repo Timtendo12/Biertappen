@@ -1,5 +1,5 @@
-@props(['tasks'])
-<h1 class="text-4xl font-bold">Opdrachten</h1>
+@props(['words'])
+<h1 class="text-4xl font-bold">Woordenlijst</h1>
     <div class="mx-auto max-w-screen-xl my-10">
         <!-- Start coding here -->
         <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
@@ -22,7 +22,7 @@
                         <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                         </svg>
-                        Add task
+                        Add word
                     </button>
                 </div>
             </div>
@@ -30,9 +30,7 @@
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th scope="col" class="px-4 py-3">Opdracht</th>
-                        <th scope="col" class="px-4 py-3">Players</th>
-                        <th scope="col" class="px-4 py-3">Type</th>
+                        <th scope="col" class="px-4 py-3">Woord</th>
                         <th scope="col" class="px-4 py-3">Bijgewerkt op</th>
                         <th scope="col" class="px-4 py-3">
                             <span class="sr-only">Actions</span>
@@ -40,12 +38,12 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($tasks->items() as $task)
-                        <x-tasks.task :task="$task" />
+                    @foreach($words as $word)
+                        <x-tasks.task :task="$word" />
                     @endforeach
                     </tbody>
                 </table>
             </div>
-            {{ $tasks->links('vendor.pagination.flowbite') }}
+            {{ $words->links('vendor.pagination.flowbite') }}
         </div>
     </div>

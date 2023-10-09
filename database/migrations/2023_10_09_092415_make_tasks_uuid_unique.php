@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('packs', function (Blueprint $table) {
-            $table->json('words_list')->nullable();
-            $tabe->json('wyr_list')->nullable();
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->uuid()->unique()->change();
         });
     }
 
@@ -22,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('tasks', function (Blueprint $table) {
+            //
+        });
     }
 };

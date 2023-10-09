@@ -49,7 +49,8 @@
                         </div>
                         <div class="flex flex-col justify-center">
                             <label for="chug" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Atje?</label>
-                            <input type="checkbox" name="chug" id="max_sips" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                            <input onchange="toggleChug(this)" type="checkbox" id="chugToggle" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                            <input type="hidden" name="chug" id="chug" value=0>
                         </div>
                     </div>
                     <div class="flex flex-row justify-center w-full gap-4">
@@ -69,30 +70,36 @@
         let durationInput = document.getElementById('duration');
         let header = document.getElementById('header');
         let form = document.getElementById('form');
-        let packid = document.getElementById('packid');
-
+        let packId = document.getElementById('packid');
+        let minSips = document.getElementById('min_sips');
+        let maxSips = document.getElementById('max_sips');
+        let chug = document.getElementsByName('chug');
+        let chugToggle = document.getElementById('chugToggle');
+        let methodElement = document.getElementsByName('_method')[0];
 
         let tasks = @json($tasks->items());
 
         let task = tasks.find(task => task.uuid === uuid);
-        if(!task)
-            task = {'id': null, 'task': '', 'players': '', 'type': ''};
-        console.log(tasks);
+        if(!task) return console.error('Task not found with uuid', uuid);
+        console.log(tasks, uuid);
         console.log(task);
         sessionStorage.setItem('task', JSON.stringify(task));
 
         //change form action url
         form.action = `/admin/tasks/${task.id}`;
 
-        let methodElement = document.createElement('input');
-        methodElement.type = 'hidden';
-        methodElement.name = '_method';
-        methodElement.value = 'PUT';
+        // remove packid input
+        console.log(packId);
+        if(packId) packId.remove();
+
+        if (!methodElement) {
+            methodElement = document.createElement('input');
+            methodElement.type = 'hidden';
+            methodElement.name = '_method';
+            methodElement.value = 'PUT';
+        }
 
         form.appendChild(methodElement);
-
-        // remove packid input
-        packid.remove();
 
         // fill in the inputs
         header.innerText = "Task bewerken";
@@ -100,5 +107,55 @@
         playerInput.value = task.players;
         typeInput.value = task.type;
         durationInput.value = task.duration;
+        minSips.value = task.min_sips;
+        maxSips.value = task.max_sips;
+        chug.value = task.chug;
+        chugToggle.checked = (task.chug === 1);
+    }
+
+    function resetModal() {
+        console.log('resetting modal');
+        let taskInput = document.getElementById('task');
+        let playerInput = document.getElementById('players');
+        let typeInput = document.getElementById('type');
+        let durationInput = document.getElementById('duration');
+        let header = document.getElementById('header');
+        let form = document.getElementById('form');
+        let minSips = document.getElementById('min_sips');
+        let maxSips = document.getElementById('max_sips');
+        let chug = document.getElementsByName('chug');
+        let chugToggle = document.getElementById('chugToggle');
+
+        //change form action url
+        form.action = `/admin/tasks`;
+        form.method = 'POST';
+
+        // remove method input
+        let methodElement = document.querySelector('input[name="_method"]');
+        if(methodElement) methodElement.remove();
+
+        // fill in the inputs
+        header.innerText = "Task aanmaken";
+        taskInput.value = '';
+        playerInput.value = '';
+        typeInput.value = '';
+        durationInput.value = '';
+        minSips.value = '';
+        maxSips.value = '';
+        chug.value = 0;
+        chugToggle.checked = false;
+    }
+
+    function toggleChug(el) {
+        console.dir(el);
+        console.log(el.checked);
+        let chug = document.getElementsByName('chug')[0];
+        console.dir(chug);
+        if(el.checked) {
+            chug.value = 1;
+        } else {
+            chug.value = 0;
+        }
+        console.log(chug.value);
     }
 </script>

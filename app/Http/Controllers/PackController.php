@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePackRequest;
 use App\Http\Requests\UpdatePackRequest;
 use App\Models\Pack;
+use App\Models\WordList;
 use Illuminate\Http\Request;
 use App\Traits\PackTrait;
 use Illuminate\Validation\Rule;
@@ -50,12 +51,18 @@ class PackController extends Controller
         }
 
         // save pack
-        Pack::create([
+        $pack = Pack::create([
             'uuid' => $uuid,
             'name' => $validated['name'],
             'description' => $validated['description'],
             'image' => $image,
             'is_active' => $validated['is_active']
+        ]);
+
+        // create a word_list
+        WordList::create([
+            'name' => $pack->name,
+            'pack_id' => $pack->id
         ]);
 
         return redirect(route('packs.index'))->with('success', 'Pack succesvol aangemaakt.');
@@ -66,6 +73,14 @@ class PackController extends Controller
      */
     public function show(Pack $pack)
     {
+        $hasWordList = $pack->wordList()->exists();
+        if (!$hasWordList) {
+            WordList::create([
+                'name' => $pack->name,
+                'pack_id' => $pack->id
+            ]);
+        }
+
         return view('admin.packs.show', [
             'pack' => $pack,
             'tasks' => $pack->tasks()->paginate(10)

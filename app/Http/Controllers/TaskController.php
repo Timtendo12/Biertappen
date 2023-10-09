@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTaskReqeuest;
 use App\Http\Requests\UpdateTaskReqeuest;
 use App\Models\Task;
-use Illuminate\Http\Request;
+use Ramsey\Uuid\Uuid;
 
 class TaskController extends Controller
 {
@@ -23,9 +23,16 @@ class TaskController extends Controller
     public function store(StoreTaskReqeuest $request)
     {
         $request = $request->validated();
+
+        $request['uuid'] = Uuid::uuid4();
+
         $request['players'] = intval($request['players']);
         $request['duration'] = intval($request['duration']);
         $request['pack_id'] = intval($request['pack_id']);
+        $request['min_sips'] = intval($request['min_sips']);
+        $request['max_sips'] = intval($request['max_sips']);
+        $request['chug'] = boolval($request['chug']);
+
         if(Task::create($request)) {
             return back()->with('success', 'Task created successfully!');
         } else {
@@ -50,6 +57,10 @@ class TaskController extends Controller
         $task = Task::findOrFail($id);
         $request['players'] = intval($request['players']);
         $request['duration'] = intval($request['duration']);
+        $request['min_sips'] = intval($request['min_sips']);
+        $request['max_sips'] = intval($request['max_sips']);
+        $ini = $request['chug'];
+        $request['chug'] = intval($request['chug']);
         if($task->update($request)) {
             return back()->with('success', 'Task pa successfully!');
         } else {

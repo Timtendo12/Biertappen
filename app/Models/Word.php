@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Task extends Model
+class Word extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    protected $table = 'tasks';
+    protected $table = 'words';
 
-    public function pack() {
-        return $this->belongsTo(Pack::class);
+    public function wordList() {
+        return $this->belongsTo(WordList::class);
     }
 }

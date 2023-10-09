@@ -27,6 +27,9 @@ class StoreTaskReqeuest extends FormRequest
             'type' => 'required|string|',
             'duration' => 'required|integer|min:0',
             'pack_id' => 'required|integer|min:0',
+            'min_sips' => 'required|integer|min:0',
+            'max_sips' => 'required|integer|min:0',
+            'chug' => 'required',
         ];
     }
 }

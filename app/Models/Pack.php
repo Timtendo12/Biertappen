@@ -14,4 +14,12 @@ class Pack extends Model
     public function tasks(){
         return $this->hasMany(Task::class);
     }
+
+    public function wordList() {
+        return $this->hasOne(WordList::class);
+    }
+
+    public function wyr() {
+        return $this->hasMany(WYR::class);
+    }
 }
