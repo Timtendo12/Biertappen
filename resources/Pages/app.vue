@@ -59,7 +59,7 @@
       <div id="menuLayer" class="flex flex-col align-middle h-screen justify-between">
         <div></div>
 
-        <img src="/assets/img/BierTappenLow.png" alt="Logo" class="drop-shadow-2xl w-9/12 p-2 mt-4 mx-auto">
+        <img :src="'/assets/img/BierTappenLow.png'" alt="Logo" class="drop-shadow-2xl w-9/12 p-2 mt-4 mx-auto">
 
         <div id="buttons" class="flex flex-col justify-around gap-4">
           <menu_button text="Starten" v-on:click="updateModal('add_player', true)"/>
