@@ -1,0 +1,199 @@
+{
+  "format": "biertappen-deck",
+  "version": 1,
+  "deck": {
+    "name": "Klassiek Biertappen",
+    "description": "De klassiekers. Simpel, snel en altijd raak.",
+    "locale": "nl",
+    "tags": ["klassiek", "basis"],
+    "ending": { "mode": "cards", "count": 30 },
+    "cards": [
+      {
+        "type": "drinking",
+        "participants": 1,
+        "content": [
+          { "type": "variable", "value": "player1" },
+          { "type": "text", "value": " neemt " },
+          { "type": "variable", "value": "amount", "options": { "mode": "range", "min": 1, "max": 4 } },
+          { "type": "text", "value": " slokken." }
+        ]
+      },
+      {
+        "type": "drinking",
+        "participants": 2,
+        "content": [
+          { "type": "variable", "value": "player1" },
+          { "type": "text", "value": " kiest iemand die " },
+          { "type": "variable", "value": "amount", "options": { "mode": "range", "min": 2, "max": 5 } },
+          { "type": "text", "value": " slokken moet nemen. Tip: " },
+          { "type": "variable", "value": "player2" },
+          { "type": "text", "value": " kijkt wel erg schuldig." }
+        ]
+      },
+      {
+        "type": "drinking",
+        "participants": "all",
+        "content": [
+          { "type": "variable", "value": "all_players" },
+          { "type": "text", "value": " nemen allemaal 2 slokken. Proost!" }
+        ]
+      },
+      {
+        "type": "challenge",
+        "participants": 1,
+        "content": [
+          { "type": "variable", "value": "player1" },
+          { "type": "text", "value": " doet een dansje van tien seconden. Niet doen? " },
+          { "type": "variable", "value": "amount", "options": { "mode": "fixed", "value": 4 } },
+          { "type": "text", "value": " slokken." }
+        ]
+      },
+      {
+        "type": "challenge",
+        "participants": 2,
+        "content": [
+          { "type": "variable", "value": "player1" },
+          { "type": "text", "value": " en " },
+          { "type": "variable", "value": "player2" },
+          { "type": "text", "value": " doen een duel: wie het eerst lacht, neemt 3 slokken." }
+        ]
+      },
+      {
+        "type": "truth",
+        "participants": 1,
+        "content": [
+          { "type": "variable", "value": "player1" },
+          { "type": "text", "value": " vertelt het gênantste dat er ooit op een feestje is gebeurd. Geen zin? Drink " },
+          { "type": "variable", "value": "amount", "options": { "mode": "fixed", "value": 3 } },
+          { "type": "text", "value": "." }
+        ]
+      },
+      {
+        "type": "truth",
+        "participants": 2,
+        "content": [
+          { "type": "variable", "value": "player1" },
+          { "type": "text", "value": " stelt " },
+          { "type": "variable", "value": "player2" },
+          { "type": "text", "value": " één vraag die eerlijk beantwoord moet worden. Weigeren kost 3 slokken." }
+        ]
+      },
+      {
+        "type": "dare",
+        "participants": 1,
+        "content": [
+          { "type": "variable", "value": "player1" },
+          { "type": "text", "value": " belt de derde persoon in de recente gesprekken en zegt alleen: hallo, met de biertapper." }
+        ]
+      },
+      {
+        "type": "vote",
+        "participants": "all",
+        "content": [
+          { "type": "variable", "value": "all_players" },
+          { "type": "text", "value": " wijzen tegelijk naar wie het laatst te laat kwam. Meeste stemmen drinkt 3 slokken." }
+        ]
+      },
+      {
+        "type": "vote",
+        "participants": "all",
+        "content": [
+          { "type": "variable", "value": "all_players" },
+          { "type": "text", "value": " stemmen: wie zou het langst overleven zonder telefoon? De winnaar deelt 4 slokken uit." }
+        ]
+      },
+      {
+        "type": "drinking",
+        "participants": 3,
+        "content": [
+          { "type": "variable", "value": "player1" },
+          { "type": "text", "value": ", " },
+          { "type": "variable", "value": "player2" },
+          { "type": "text", "value": " en " },
+          { "type": "variable", "value": "player3" },
+          { "type": "text", "value": " proosten samen en nemen 2 slokken." }
+        ]
+      },
+      {
+        "type": "challenge",
+        "participants": 1,
+        "content": [
+          { "type": "variable", "value": "player1" },
+          { "type": "text", "value": " praat tot de volgende kaart alleen nog in vragen. Fout? " },
+          { "type": "variable", "value": "amount", "options": { "mode": "fixed", "value": 2 } },
+          { "type": "text", "value": " slokken." }
+        ]
+      },
+      {
+        "type": "drinking",
+        "participants": 2,
+        "content": [
+          { "type": "variable", "value": "player1" },
+          { "type": "text", "value": " en " },
+          { "type": "variable", "value": "player2" },
+          { "type": "text", "value": " ruilen van drankje voor één ronde." }
+        ]
+      },
+      {
+        "type": "challenge",
+        "participants": "all",
+        "content": [
+          { "type": "variable", "value": "all_players" },
+          { "type": "text", "value": " leggen een vinger op hun neus. De laatste neemt 3 slokken." }
+        ]
+      },
+      {
+        "type": "custom",
+        "participants": 1,
+        "content": [
+          { "type": "variable", "value": "player1" },
+          { "type": "text", "value": " verzint een nieuwe regel die geldt tot het einde van het spel." }
+        ]
+      },
+      {
+        "type": "drinking",
+        "participants": 1,
+        "content": [
+          { "type": "text", "value": "Iedereen die vandaag koffie heeft gedronken neemt een slok. " },
+          { "type": "variable", "value": "player1" },
+          { "type": "text", "value": " neemt er sowieso twee." }
+        ]
+      },
+      {
+        "type": "dare",
+        "participants": 2,
+        "content": [
+          { "type": "variable", "value": "player1" },
+          { "type": "text", "value": " mag " },
+          { "type": "variable", "value": "player2" },
+          { "type": "text", "value": " een nieuwe bijnaam geven voor de rest van de avond." }
+        ]
+      },
+      {
+        "type": "truth",
+        "participants": 1,
+        "content": [
+          { "type": "variable", "value": "player1" },
+          { "type": "text", "value": " laat de laatst genomen foto op de telefoon zien. Nee zeggen kost 5 slokken." }
+        ]
+      },
+      {
+        "type": "vote",
+        "participants": "all",
+        "content": [
+          { "type": "variable", "value": "all_players" },
+          { "type": "text", "value": " kiezen wie het slechtst kan zingen. Die persoon zingt één regel of drinkt 4 slokken." }
+        ]
+      },
+      {
+        "type": "drinking",
+        "participants": "all",
+        "content": [
+          { "type": "text", "value": "Waterval! " },
+          { "type": "variable", "value": "all_players" },
+          { "type": "text", "value": " beginnen tegelijk en mogen pas stoppen als hun linkerbuur stopt." }
+        ]
+      }
+    ]
+  }
+}

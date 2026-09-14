@@ -1,0 +1,82 @@
+{
+    "$comment": "Single source of truth for card variables. Read by the TypeScript engine and by PHP validation so the two can never drift.",
+    "version": 1,
+    "maxPlayerVariables": 10,
+    "variables": [
+        {
+            "id": "player1",
+            "kind": "player",
+            "index": 1,
+            "labelKey": "variables.player"
+        },
+        {
+            "id": "player2",
+            "kind": "player",
+            "index": 2,
+            "labelKey": "variables.player"
+        },
+        {
+            "id": "player3",
+            "kind": "player",
+            "index": 3,
+            "labelKey": "variables.player"
+        },
+        {
+            "id": "player4",
+            "kind": "player",
+            "index": 4,
+            "labelKey": "variables.player"
+        },
+        {
+            "id": "player5",
+            "kind": "player",
+            "index": 5,
+            "labelKey": "variables.player"
+        },
+        {
+            "id": "player6",
+            "kind": "player",
+            "index": 6,
+            "labelKey": "variables.player"
+        },
+        {
+            "id": "player7",
+            "kind": "player",
+            "index": 7,
+            "labelKey": "variables.player"
+        },
+        {
+            "id": "player8",
+            "kind": "player",
+            "index": 8,
+            "labelKey": "variables.player"
+        },
+        {
+            "id": "player9",
+            "kind": "player",
+            "index": 9,
+            "labelKey": "variables.player"
+        },
+        {
+            "id": "player10",
+            "kind": "player",
+            "index": 10,
+            "labelKey": "variables.player"
+        },
+        {
+            "id": "all_players",
+            "kind": "player_group",
+            "labelKey": "variables.allPlayers"
+        },
+        {
+            "id": "amount",
+            "kind": "numeric",
+            "labelKey": "variables.amount",
+            "defaultOptions": {
+                "mode": "range",
+                "min": 1,
+                "max": 5
+            }
+        }
+    ]
+}

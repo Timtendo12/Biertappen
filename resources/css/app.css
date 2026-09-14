@@ -1,0 +1,82 @@
+@import 'tailwindcss';
+
+@source '../../storage/framework/views/*.php';
+@source '../views/**/*.blade.php';
+@source '../js/**/*.{vue,ts}';
+
+@theme {
+    --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji';
+
+    /* Night palette — the game is played in bars and living rooms, mostly in the dark. */
+    --color-night: #0f0a1e;
+    --color-night-soft: #1b1330;
+    --color-night-card: #241a3f;
+
+    --color-beer: #f5b301;
+    --color-beer-deep: #d99400;
+    --color-foam: #fff8e7;
+
+    --color-accent: #7c5cff;
+    --color-danger: #ff5470;
+    --color-success: #2fd47a;
+
+    /* Card flip/swipe timings, referenced from components so motion stays consistent. */
+    --ease-card: cubic-bezier(0.2, 0.8, 0.2, 1);
+    --duration-flip: 520ms;
+    --duration-swipe: 260ms;
+}
+
+@layer base {
+    html {
+        /* Kill the pull-to-refresh gesture that would otherwise destroy a running game. */
+        overscroll-behavior: none;
+        -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+        overscroll-behavior: none;
+        /* Respect the notch/home indicator on iOS when running standalone. */
+        padding: env(safe-area-inset-top) env(safe-area-inset-right)
+                 env(safe-area-inset-bottom) env(safe-area-inset-left);
+        min-height: 100dvh;
+    }
+
+    /* Focus must always be visible — several screens are keyboard-navigable. */
+    :focus-visible {
+        outline: 3px solid var(--color-beer);
+        outline-offset: 2px;
+        border-radius: 4px;
+    }
+
+    /* Game surfaces must not be text-selectable: a long-press during a swipe
+       otherwise pops the selection menu over the card. */
+    .no-select {
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+    }
+}
+
+/*
+ * Honour the OS setting globally. The in-app "reduced motion" toggle adds
+ * .reduce-motion to <html>, so both paths land in the same place.
+ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+html.reduce-motion *,
+html.reduce-motion *::before,
+html.reduce-motion *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+}

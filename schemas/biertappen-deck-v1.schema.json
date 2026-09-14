@@ -1,0 +1,310 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://biertappen.app/schemas/biertappen-deck-v1.schema.json",
+  "title": "Biertappen Deck",
+  "description": "Public interchange format for importing and exporting Biertappen decks. Designed to be human-readable and AI-friendly. This file is the contract: the application validates every import against it directly.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "version",
+    "deck"
+  ],
+  "properties": {
+    "format": {
+      "type": "string",
+      "const": "biertappen-deck"
+    },
+    "version": {
+      "type": "integer",
+      "const": 1
+    },
+    "deck": {
+      "$ref": "#/$defs/deck"
+    }
+  },
+  "$defs": {
+    "deck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "description",
+        "ending",
+        "cards"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 1000
+        },
+        "locale": {
+          "description": "Language the card content is written in. Independent of the interface language.",
+          "type": "string",
+          "pattern": "^[a-z]{2}(-[A-Z]{2})?$",
+          "default": "nl"
+        },
+        "tags": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32,
+            "pattern": "^[a-z0-9][a-z0-9 _-]*$"
+          }
+        },
+        "ending": {
+          "$ref": "#/$defs/ending"
+        },
+        "cards": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2000,
+          "items": {
+            "$ref": "#/$defs/card"
+          }
+        }
+      }
+    },
+    "ending": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode"
+      ],
+      "properties": {
+        "mode": {
+          "description": "'cards' stops after a fixed number of cards; 'all_cards_once' stops when every playable card has been seen exactly once.",
+          "type": "string",
+          "enum": [
+            "cards",
+            "all_cards_once"
+          ]
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "cards"
+              }
+            },
+            "required": [
+              "mode"
+            ]
+          },
+          "then": {
+            "required": [
+              "count"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "all_cards_once"
+              }
+            },
+            "required": [
+              "mode"
+            ]
+          },
+          "then": {
+            "not": {
+              "required": [
+                "count"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "card": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "participants",
+        "content"
+      ],
+      "properties": {
+        "id": {
+          "description": "Optional author-supplied identifier. Never a database id; used only to keep re-imports stable.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "type": {
+          "description": "Free-form category slug, e.g. challenge, truth, dare, vote, drinking, custom. Unknown types render with the generic card style rather than failing.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50,
+          "pattern": "^[a-z0-9_-]+$"
+        },
+        "participants": {
+          "description": "How many DISTINCT players the card needs, or 'all' to target everyone. A card may not reference a player variable beyond this number.",
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10
+            },
+            {
+              "const": "all"
+            }
+          ]
+        },
+        "content": {
+          "description": "Ordered segments. Text and variables are stored separately so the engine can resolve variables without parsing prose.",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 100,
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/textSegment"
+              },
+              {
+                "$ref": "#/$defs/variableSegment"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "textSegment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "value"
+      ],
+      "properties": {
+        "type": {
+          "const": "text"
+        },
+        "value": {
+          "type": "string",
+          "maxLength": 5000
+        }
+      }
+    },
+    "variableSegment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "value"
+      ],
+      "properties": {
+        "type": {
+          "const": "variable"
+        },
+        "value": {
+          "type": "string",
+          "enum": [
+            "player1",
+            "player2",
+            "player3",
+            "player4",
+            "player5",
+            "player6",
+            "player7",
+            "player8",
+            "player9",
+            "player10",
+            "all_players",
+            "amount"
+          ]
+        },
+        "options": {
+          "$ref": "#/$defs/amountOptions"
+        }
+      },
+      "allOf": [
+        {
+          "comment": "Only the amount variable is configurable; player variables take no options.",
+          "if": {
+            "properties": {
+              "value": {
+                "not": {
+                  "const": "amount"
+                }
+              }
+            },
+            "required": [
+              "value"
+            ]
+          },
+          "then": {
+            "not": {
+              "required": [
+                "options"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "amountOptions": {
+      "description": "How {amount} resolves at play time. Omitted means a random 1-5.",
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "mode",
+            "value"
+          ],
+          "properties": {
+            "mode": {
+              "const": "fixed"
+            },
+            "value": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "mode",
+            "min",
+            "max"
+          ],
+          "properties": {
+            "mode": {
+              "const": "range"
+            },
+            "min": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "max": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          }
+        }
+      ]
+    }
+  }
+}
